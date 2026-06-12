@@ -20,6 +20,4 @@ public class OrderItem {
     private Integer quantity;
 
     private BigDecimal price;
-
-    private Order order;
 }
