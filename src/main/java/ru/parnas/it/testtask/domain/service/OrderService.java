@@ -11,7 +11,6 @@ import ru.parnas.it.testtask.dictionary.OrderStatus;
 import ru.parnas.it.testtask.domain.model.Order;
 import ru.parnas.it.testtask.exception.OrderNotFoundException;
 import ru.parnas.it.testtask.mapper.OrderMapper;
-import ru.parnas.it.testtask.web.dto.OrderResponse;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
