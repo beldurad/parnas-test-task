@@ -28,7 +28,7 @@ public class OrderEntity {
     private LocalDateTime orderDate;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false, length = 50)
+    @Column(name = "status", nullable = false, columnDefinition = "VARCHAR(50)")
     private OrderStatus status;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)

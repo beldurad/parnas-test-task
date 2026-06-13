@@ -1,5 +1,6 @@
 package ru.parnas.it.testtask.mq.listener;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -17,6 +18,7 @@ public class OrderEventListener {
     private final OrderRepository orderRepository;
 
     @RabbitListener(queues = RabbitConfig.ORDER_CREATED_QUEUE)
+    @Transactional
     public void handleOrderCreated(OrderCreatedEvent event) {
         log.info("Получено сообщение из очереди '{}'. Обработка заказа ID: {}, Клиент: {}, Сумма: {}",
                 RabbitConfig.ORDER_CREATED_QUEUE, event.orderId(), event.customerName(), event.totalAmount());

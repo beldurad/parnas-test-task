@@ -30,7 +30,6 @@ public class OrderService {
     @Transactional
     public Order createOrder(Order order) {
 
-        order.setId(UUID.randomUUID());
         order.setOrderDate(LocalDateTime.now());
         order.setStatus(OrderStatus.CREATED);
 

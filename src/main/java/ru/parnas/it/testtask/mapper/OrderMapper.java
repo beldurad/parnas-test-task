@@ -1,8 +1,10 @@
 package ru.parnas.it.testtask.mapper;
 
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.MappingTarget;
 import ru.parnas.it.testtask.database.model.OrderEntity;
 import ru.parnas.it.testtask.database.model.OrderItemEntity;
 import ru.parnas.it.testtask.domain.model.Order;
@@ -17,10 +19,12 @@ public interface OrderMapper {
 
     Order toOrder(OrderEntity entity);
 
+    @Mapping(target = "order", ignore = true)
     OrderItem toOrderItem(OrderItemEntity entity);
 
     OrderEntity toOrderEntity(Order order);
 
+    @Mapping(target = "order", ignore = true)
     OrderItemEntity toOrderItemEntity(OrderItem orderItem);
 
     @Mapping(target = "id", ignore = true)
@@ -35,4 +39,11 @@ public interface OrderMapper {
     OrderResponse toResponse(Order order);
 
     OrderItemResponse toResponseItem(OrderItem item);
+
+    @AfterMapping
+    default void linkOrderItems(@MappingTarget OrderEntity orderEntity) {
+        if (orderEntity.getItems() != null) {
+            orderEntity.getItems().forEach(item -> item.setOrder(orderEntity));
+        }
+    }
 }
