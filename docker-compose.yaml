@@ -6,21 +6,26 @@ services:
     container_name: postgres_orders
     restart: always
     env_file:
-      - docker.env
+      - ./docker.env
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - test-task
+
 
   rabbitmq-broker:
     image: rabbitmq:3-management-alpine
     container_name: rabbitmq_orders
     restart: always
     env_file:
-      - docker.env
+      - ./docker.env
     ports:
       - "5672:5672"
       - "15672:15672"
+    networks:
+      - test-task
 
   app:
     build:
@@ -31,10 +36,14 @@ services:
     ports:
       - "8080:8080"
     env_file:
-      - docker.env
+      - ./docker.env
+    networks:
+      - test-task
     depends_on:
       - postgres-db
       - rabbitmq-broker
 
 volumes:
   postgres_data:
+networks:
+  test-task:

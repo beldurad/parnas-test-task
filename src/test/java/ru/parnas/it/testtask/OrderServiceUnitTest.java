@@ -40,7 +40,6 @@ class OrderServiceUnitTest {
 
     @Test
     void createOrder_ShouldSaveToDbAndSendNotification() {
-        // GIVEN (Подготовка данных и определение поведения моков)
         CreateOrderRequest request = new CreateOrderRequest("Иван Иванов", List.of());
 
         Order domainOrder = new Order();

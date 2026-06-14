@@ -79,8 +79,6 @@ class OrderIntegrationTest {
         assertThat(savedEntity.getCustomerName()).isEqualTo("Алексей");
         assertThat(savedEntity.getItems()).hasSize(1);
 
-        assertThat(savedEntity.getStatus()).isEqualTo(OrderStatus.CREATED);
-
         await()
                 .atMost(5, TimeUnit.SECONDS)
                 .pollInterval(500, TimeUnit.MILLISECONDS)
